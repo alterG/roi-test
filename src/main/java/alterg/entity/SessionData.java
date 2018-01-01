@@ -10,7 +10,7 @@ import org.joda.time.DateTime;
 @Data
 public class SessionData implements Cloneable {
 
-    private DateTime time;
+    private DateTime startTime;
     private int userId;
     private String url;
     private int wastedTime;
