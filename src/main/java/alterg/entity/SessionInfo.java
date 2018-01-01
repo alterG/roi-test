@@ -10,7 +10,7 @@ import lombok.Data;
 public class SessionInfo {
 
     private int timeStamp;
-    private int userId;
+    private String userId;
     private String url;
     private int wastedTime;
 }
