@@ -26,10 +26,17 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
         <lombok.version>1.16.18</lombok.version>
+        <joda-time.version>2.9.9</joda-time.version>
     </properties>
 
 
