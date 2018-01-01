@@ -1,4 +1,4 @@
-package alterg.entity;
+package alterg.bean;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import lombok.Data;
  */
 
 @Data
-public class SessionInfo {
+public class SessionDataBean {
 
     private int timeStamp;
     private String userId;
