@@ -31,12 +31,18 @@
             <artifactId>joda-time</artifactId>
             <version>${joda-time.version}</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.supercsv</groupId>
+            <artifactId>super-csv</artifactId>
+            <version>${super-csv.version}</version>
+        </dependency>
 
     </dependencies>
 
     <properties>
         <lombok.version>1.16.18</lombok.version>
         <joda-time.version>2.9.9</joda-time.version>
+        <super-csv.version>2.4.0</super-csv.version>
     </properties>
 
 
