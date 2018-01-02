@@ -7,7 +7,7 @@ import lombok.Data;
  */
 
 @Data
-public class SessionDataBean {
+public class SessionDataInputBean {
 
     private int timeStamp;
     private String userId;
