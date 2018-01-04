@@ -1,14 +1,14 @@
 package alterg.transform;
 
-import alterg.bean.SessionDataBean;
-import alterg.entity.SessionData;
+import alterg.dto.SessionData;
+import alterg.dto.SessionDataInputBean;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-public class SessionTransformer implements Transformer<SessionDataBean, SessionData> {
+public class SessionTransformer implements Transformer<SessionDataInputBean, SessionData> {
 
     @Override
-    public SessionData transform(SessionDataBean source) {
+    public SessionData transform(SessionDataInputBean source) {
         SessionData result = new SessionData();
         result.setStartTime(new DateTime(source.getTimeStamp() * 1000L, DateTimeZone.UTC));
         result.setUserId(parseId(source.getUserId()));
