@@ -1,6 +1,6 @@
 package alterg.service;
 
-import alterg.bean.SessionDataInputBean;
+import alterg.dto.SessionDataInputBean;
 import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
 import org.supercsv.cellprocessor.ift.CellProcessor;
