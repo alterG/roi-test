@@ -1,4 +1,4 @@
-package alterg.entity;
+package alterg.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

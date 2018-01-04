@@ -1,4 +1,4 @@
-package alterg.bean;
+package alterg.dto;
 
 import lombok.Data;
 
