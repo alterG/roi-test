@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SessionDataHandler {
 
-    public static final double PREFIX_MILLI = 10e-3;
+    public static final double PREFIX_MILLI = 1e-3;
     public static final String PREFIX_USER_ID = "user";
 
     private SessionAverageTimeBeanTransformer transformer;
@@ -39,13 +39,15 @@ public class SessionDataHandler {
      * @return divided sessions
      */
     public List<SessionData> divideSessionsByDay() {
+        List<SessionData> dividedSessions = new ArrayList<>();
         for (SessionData sessionData : sessionDataList) {
             int dayDifference = getDayDifference(sessionData);
             if (dayDifference == 1) {
                 SessionData slicedSession = divideAndGetSlicedSession(sessionData);
-                sessionDataList.add(slicedSession);
+                dividedSessions.add(slicedSession);
             }
         }
+        sessionDataList.addAll(dividedSessions);
         return sessionDataList;
     }
 
@@ -83,7 +85,7 @@ public class SessionDataHandler {
      */
     private int getDayDifference(SessionData sessionData) {
         DateTime startTime = sessionData.getStartTime();
-        DateTime endTime = startTime.plus((int) (sessionData.getWastedTime() / PREFIX_MILLI));
+        DateTime endTime = startTime.plus((int)(sessionData.getWastedTime() / PREFIX_MILLI));
         Days days = Days.daysBetween(startTime.toLocalDate(), endTime.toLocalDate());
         return days.getDays();
     }
@@ -96,8 +98,7 @@ public class SessionDataHandler {
     private SessionData divideAndGetSlicedSession(SessionData sessionData) {
         SessionData sessionDataClone = new SessionData(sessionData);
         int fullWastedTime = sessionData.getWastedTime();
-        sessionData.setWastedTime((int)
-                                      (Days.ONE.toStandardSeconds().getSeconds()
+        sessionData.setWastedTime((int)(Days.ONE.toStandardSeconds().getSeconds()
                                        - sessionData.getStartTime().millisOfDay().get() * PREFIX_MILLI));
 
         sessionDataClone.setStartTime(sessionData.getStartTime().withTimeAtStartOfDay().plus(Days.ONE));
