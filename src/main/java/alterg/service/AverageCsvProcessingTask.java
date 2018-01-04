@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class AverageCsvProcessingTask implements Runnable {
 
-    private SessionTransformer transformer;
     private File inputFile;
-    private File outputFile;
+    private File outputDirectory;
+    private SessionTransformer transformer;
 
     @Override
     public void run() {
@@ -26,6 +26,7 @@ public class AverageCsvProcessingTask implements Runnable {
         List<SessionData> sessionDataList = transform(inputBeans);
         Map<LocalDate, List<SessionDataOutputBean>> sessionOutputBeans = process(sessionDataList);
         CsvFileWriter writer = new CsvFileWriter();
+        File outputFile = getOutputFile(inputFile, outputDirectory);
         writer.write(sessionOutputBeans, outputFile);
     }
 
@@ -33,6 +34,11 @@ public class AverageCsvProcessingTask implements Runnable {
         SessionDataHandler handler = new SessionDataHandler(sessionDataList);
         handler.divideSessionsByDay();
         return handler.getSessionOutputBeans();
+    }
+
+    private File getOutputFile(File inputFile, File outputDirectory) {
+        String outputFileName = "avg_" + inputFile.getName();
+        return new File(outputDirectory, outputFileName);
     }
 
     private List<SessionData> transform(List<SessionDataInputBean> inputBeans) {
