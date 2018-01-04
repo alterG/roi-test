@@ -52,7 +52,6 @@ public class SessionDataHandler {
 
     /**
      * unify sessions start on the same day, calculate average time visit
-     *
      * @return sessionATB Map divided by days
      */
     public Map<LocalDate, List<SessionAverageTimeBean>> getSessionOutputBeans() {
