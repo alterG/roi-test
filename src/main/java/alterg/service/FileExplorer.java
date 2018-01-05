@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class FileExplorer {
 
     private final Pattern commandPattern = Pattern.compile("^\\s*([a-zA-Z]+)");
-    private final Pattern filePattern = Pattern.compile("\\s+(\\w+)");
+    private final Pattern filePattern = Pattern.compile("\\s+(\\w+\\.{0,1}\\w+)");
     private final SessionDataProcessor processor;
     private File pwd;
 
@@ -80,7 +80,7 @@ public class FileExplorer {
                     e.getMessage();
                 }
                 break;
-            case MENU:
+            case HELP:
                 printMenu();
                 break;
             case RM:
@@ -98,10 +98,16 @@ public class FileExplorer {
         }
     }
 
+    /**
+     * Check string on empty or some spaces
+     */
     private boolean isStringEmpty(String source) {
         return (source.matches("\\s*") || source.isEmpty());
     }
 
+    /**
+     * Compare string with "..", that's parent directory symbol in unix systems
+     */
     private boolean isParentSymbol(String source) {
         return source.matches("\\s*\\.\\.");
     }
@@ -109,12 +115,15 @@ public class FileExplorer {
     /**
      * Change pwd to given directory
      */
-    private void cd(String source) throws IllegalArgumentException {
+    private void cd(String source) throws IllegalArgumentException{
         File argument = null;
         if (isParentSymbol(source)) {
             argument = pwd.getParentFile();
         } else {
             Matcher matcher = filePattern.matcher(source);
+            if (!matcher.find()) {
+                throw new IllegalArgumentException("Command argument parse error");
+            }
             String fileName = matcher.group(1);
             argument = new File(pwd, fileName);
         }
@@ -131,6 +140,9 @@ public class FileExplorer {
      */
     private void cat(String source) throws IOException {
         Matcher matcher = filePattern.matcher(source);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("Command argument parse error");
+        }
         String argument = matcher.group(1);
         File file = new File(pwd, argument);
         try {
@@ -155,6 +167,9 @@ public class FileExplorer {
      */
     private boolean mkdir(String source) {
         Matcher matcher = filePattern.matcher(source);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("Command argument parse error");
+        }
         String argument = matcher.group(1);
         File directory = new File(pwd, argument);
         return directory.mkdir();
@@ -167,6 +182,9 @@ public class FileExplorer {
      */
     private boolean rm(String source) {
         Matcher matcher = filePattern.matcher(source);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("Command argument parse error");
+        }
         String argument = matcher.group(1);
         File file = new File(pwd, argument);
         return file.delete();
@@ -183,6 +201,9 @@ public class FileExplorer {
             argument = pwd;
         } else {
             Matcher matcher = filePattern.matcher(source);
+            if (!matcher.find()) {
+                throw new IllegalArgumentException("Command argument parse error");
+            }
             String fileName = matcher.group(1);
             argument = new File(pwd, fileName);
         }
@@ -196,11 +217,19 @@ public class FileExplorer {
      */
     private void mov(String source) {
         Matcher matcher = filePattern.matcher(source);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("Command argument parse error");
+        }
         String fileName = matcher.group(1);
         File argumentFile = new File(pwd, fileName);
+
         Matcher matcher2 = filePattern.matcher(source.substring(matcher.end(1)));
+        if (!matcher2.find()) {
+            throw new IllegalArgumentException("Command argument parse error");
+        }
         String directoryName = matcher2.group(1);
         File argumentDirectory = new File(pwd, directoryName);
+
         if (!argumentDirectory.isDirectory()) {
             throw new IllegalArgumentException(argumentDirectory + " isn't directory.");
         }
@@ -218,7 +247,7 @@ public class FileExplorer {
                            + "* ls - to show files in work directory\n"
                            + "* cd dirname - to change work directory\n"
                            + "* cat filename - to print file content\n"
-                           + "* menu - show menu\n"
+                           + "* help - show menu\n"
                            + "* exit - close program");
     }
 
