@@ -21,7 +21,6 @@ public class FileExplorer {
         pwd = processor.getInputDirectory();
         Scanner scanner = new Scanner(System.in);
         printMenu();
-
         while (true) {
             System.out.print(pwd.getAbsolutePath() + "@user: ");
             String userInput = scanner.nextLine();
