@@ -1,7 +1,8 @@
 package alterg.comparator;
 
+import static alterg.service.SessionDataUtilities.parseId;
+
 import alterg.dto.SessionAverageTimeBean;
-import alterg.service.SessionDataHandler;
 
 import java.util.Comparator;
 
@@ -9,6 +10,6 @@ public class SessionATBUserIdComparator implements Comparator<SessionAverageTime
 
     @Override
     public int compare(SessionAverageTimeBean o1, SessionAverageTimeBean o2) {
-        return SessionDataHandler.parseId(o1.getUserId()) - SessionDataHandler.parseId(o2.getUserId());
+        return parseId(o1.getUserId()) - parseId(o2.getUserId());
     }
 }
