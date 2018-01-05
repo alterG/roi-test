@@ -7,7 +7,7 @@ public enum Commands {
     CAT("cat"),
     MKDIR("mkdir"),
     MOV("mov"),
-    MENU("menu"),
+    HELP("help"),
     RM("rm"),
     EXIT("exit"),
     UNKNOWN_COMMAND("unknown");
