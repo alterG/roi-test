@@ -3,6 +3,7 @@ package alterg.service;
 public class SessionDataUtilities {
 
     public static final String PREFIX_USER_ID = "user";
+    public static final double PREFIX_MILLI = 1e-3;
 
     /**
      * utility method works with "userXXX", where XXX is required id
