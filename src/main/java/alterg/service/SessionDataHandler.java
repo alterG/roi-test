@@ -1,5 +1,7 @@
 package alterg.service;
 
+import static alterg.service.SessionDataUtilities.PREFIX_MILLI;
+
 import alterg.comparator.SessionATBUrlComparator;
 import alterg.comparator.SessionATBUserIdComparator;
 import alterg.dto.SessionAverageTimeBean;
@@ -19,18 +21,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SessionDataHandler {
 
-    public static final double PREFIX_MILLI = 1e-3;
-    public static final String PREFIX_USER_ID = "user";
-
-    private SessionAverageTimeBeanTransformer transformer;
     private List<SessionData> sessionDataList;
-
-    /**
-     * utility method works with "userXXX", where XXX is required id
-     */
-    public static int parseId(String userId) {
-        return Integer.parseInt(userId.substring(userId.lastIndexOf(PREFIX_USER_ID) + PREFIX_USER_ID.length()));
-    }
 
     /**
      * Divide sessions which start on one day and end on another
@@ -58,7 +49,7 @@ public class SessionDataHandler {
      */
     public Map<LocalDate, List<SessionAverageTimeBean>> getSessionOutputBeans() {
         Map<LocalDate, List<SessionData>> sessionsByDay = getSessionsByDayMap();
-        Map<LocalDate, List<SessionAverageTimeBean>> sessionOutputBeans = new HashMap<>(); // rename
+        Map<LocalDate, List<SessionAverageTimeBean>> sessionOutputBeans = new HashMap<>();
         for (LocalDate date : sessionsByDay.keySet()) {
             List<SessionData> sameDaySessions = sessionsByDay.get(date);
             List<SessionAverageTimeBean> sameDayAverageTimeSessions = transform(sameDaySessions);
@@ -72,6 +63,7 @@ public class SessionDataHandler {
      * transform SessionData list to SessionAverageTimeBean list
      */
     private List<SessionAverageTimeBean> transform(List<SessionData> sameDaySessions) {
+        SessionAverageTimeBeanTransformer transformer = new SessionAverageTimeBeanTransformer();
         return sameDaySessions.stream()
             .map(x -> transformer.transform(x))
             .collect(Collectors.toList());
