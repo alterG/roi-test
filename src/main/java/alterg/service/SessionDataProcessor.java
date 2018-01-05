@@ -1,6 +1,7 @@
 package alterg.service;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -14,7 +15,7 @@ public class SessionDataProcessor {
 
     public static final int THREADS_MAX = 10;
     public static final String PREFIX_RESULT_FILE = "avg_";
-    private final File inputDirectory;
+    @Getter private final File inputDirectory;
     private final File outputDirectory;
     private final FilenameFilter filter;
 
