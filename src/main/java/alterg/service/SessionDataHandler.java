@@ -14,6 +14,7 @@ import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,7 +51,8 @@ public class SessionDataHandler {
     public Map<LocalDate, List<SessionAverageTimeBean>> getSessionOutputBeans() {
         Map<LocalDate, List<SessionData>> sessionsByDay = getSessionsByDayMap();
         Map<LocalDate, List<SessionAverageTimeBean>> sessionOutputBeans = new HashMap<>();
-        for (LocalDate date : sessionsByDay.keySet()) {
+        for (Iterator<LocalDate> iterator = sessionsByDay.keySet().iterator(); iterator.hasNext(); ) {
+            LocalDate date = iterator.next();
             List<SessionData> sameDaySessions = sessionsByDay.get(date);
             List<SessionAverageTimeBean> sameDayAverageTimeSessions = transform(sameDaySessions);
             List<SessionAverageTimeBean> unitedByDaySessions = getUnitedByDaySessions(sameDayAverageTimeSessions);
@@ -65,7 +67,7 @@ public class SessionDataHandler {
     private List<SessionAverageTimeBean> transform(List<SessionData> sameDaySessions) {
         SessionAverageTimeBeanTransformer transformer = new SessionAverageTimeBeanTransformer();
         return sameDaySessions.stream()
-            .map(x -> transformer.transform(x))
+            .map(transformer::transform)
             .collect(Collectors.toList());
     }
 
