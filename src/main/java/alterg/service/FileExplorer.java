@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -99,35 +98,8 @@ public class FileExplorer {
         }
     }
 
-    /**
-     * parse second argument from user input
-     * note: ".." means parent file
-     */
-    private File getSecondArgument(String source, Commands command) throws IllegalArgumentException {
-
-        Matcher matcher = filePattern.matcher(source);
-        if (!matcher.find()) {
-            throw new IllegalArgumentException("Wrong argument.");
-        }
-        if ("..".equals(matcher.group(1))) {
-            return pwd.getParentFile();
-        }
-        if (pwd.listFiles() == null) {
-            throw new IllegalArgumentException(("Directory is empty."));
-        }
-        File parsedFile = new File(pwd.getAbsolutePath() + "\\" + matcher.group(1));
-        if (isExistValidation) {
-            if (Arrays.asList(pwd.listFiles()).contains(parsedFile)) {
-                return parsedFile;
-            } else {
-                throw new IllegalArgumentException("File not found.");
-            }
-        }
-        return parsedFile;
-    }
-
     private boolean isStringEmpty(String source) {
-        return source.matches("\\s*");
+        return (source.matches("\\s*") || source.isEmpty());
     }
 
     private boolean isParentSymbol(String source) {
@@ -178,6 +150,7 @@ public class FileExplorer {
 
     /**
      * Create directory
+     *
      * @return true if operation is successful
      */
     private boolean mkdir(String source) {
@@ -201,19 +174,18 @@ public class FileExplorer {
 
     /**
      * Print files in directory
+     *
      * @param source user input without command part
      */
     private void ls(String source) {
         File argument = null;
-        if (isStringEmpty(source)) {
+        if (isStringEmpty(source) || isParentSymbol(source)) {
             argument = pwd;
+        } else {
+            Matcher matcher = filePattern.matcher(source);
+            String fileName = matcher.group(1);
+            argument = new File(pwd, fileName);
         }
-        if (isParentSymbol(source)) {
-            argument = pwd.getParentFile();
-        }
-        Matcher matcher = filePattern.matcher(source);
-        String fileName = matcher.group(1);
-        argument = new File(pwd, fileName);
         for (File file : argument.listFiles()) {
             System.out.println(String.format("%s\t%s", file.isFile() ? "-" : "d", file.getName()));
         }
@@ -243,9 +215,9 @@ public class FileExplorer {
                            + "* calc - to calculate sessions average visit time\n"
                            + "* mov filename directory - to move file to directory\n"
                            + "* rm filename - to delete file\n"
-                           + "* ls - to show files in work directory"
-                           + "* cd dirname - to change work directory"
-                           + "* cat filename - to print file content"
+                           + "* ls - to show files in work directory\n"
+                           + "* cd dirname - to change work directory\n"
+                           + "* cat filename - to print file content\n"
                            + "* menu - show menu\n"
                            + "* exit - close program");
     }
