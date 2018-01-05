@@ -1,6 +1,6 @@
 package alterg.service;
 
-import static alterg.service.SessionDataUtilities.PREFIX_MILLI;
+import static alterg.util.SessionDataUtilities.PREFIX_MILLI;
 
 import alterg.comparator.SessionATBUrlComparator;
 import alterg.comparator.SessionATBUserIdComparator;

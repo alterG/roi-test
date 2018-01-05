@@ -1,4 +1,4 @@
-package alterg.service;
+package alterg.util;
 
 public enum Commands {
     CALC("calc"),

@@ -2,7 +2,7 @@ package alterg.transform;
 
 import alterg.dto.SessionData;
 import alterg.dto.SessionDataInputBean;
-import alterg.service.SessionDataUtilities;
+import alterg.util.SessionDataUtilities;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 

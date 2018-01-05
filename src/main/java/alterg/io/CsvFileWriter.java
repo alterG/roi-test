@@ -1,4 +1,4 @@
-package alterg.service;
+package alterg.io;
 
 import alterg.dto.SessionAverageTimeBean;
 import org.joda.time.LocalDate;

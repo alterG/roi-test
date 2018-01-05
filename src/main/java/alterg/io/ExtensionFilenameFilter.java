@@ -1,4 +1,4 @@
-package alterg;
+package alterg.io;
 
 import lombok.AllArgsConstructor;
 

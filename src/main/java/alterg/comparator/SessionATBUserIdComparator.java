@@ -1,6 +1,6 @@
 package alterg.comparator;
 
-import static alterg.service.SessionDataUtilities.parseId;
+import static alterg.util.SessionDataUtilities.parseId;
 
 import alterg.dto.SessionAverageTimeBean;
 

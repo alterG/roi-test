@@ -1,4 +1,4 @@
-package alterg.service;
+package alterg.io;
 
 import alterg.dto.SessionDataInputBean;
 import org.supercsv.cellprocessor.ParseInt;
