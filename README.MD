@@ -9,9 +9,18 @@
 - [X] instruction how to run the program
 
 **How to run**  
-* clone repository
-* build application with maven (mvn package)
-* execute jar-file
+1. Clone repository
+```
+git clone git@github.com:alterG/roi-test.git
+```
+2. Build application with maven
+```
+mvn install
+```
+3. Execute jar-file
+```
+java -jar roi-test-1.0-SNAPSHOT.jar
+```
 
 **Available commands**    
 * calc - to calculate sessions average visit time\n"
@@ -22,3 +31,8 @@
 * cat filename - to print file content\n"
 * help - show menu\n"
 * exit - close program");
+
+**Available commands** 
+Author: Igor Shchipanov
+Email: oneyearday@gmail.com
+phone: 8 (911) 827-72-00
