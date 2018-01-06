@@ -32,7 +32,7 @@ java -jar roi-test-1.0-SNAPSHOT.jar
 * help - show menu
 * exit - close program
 
-**Available commands** 
+**Available commands**   
 Author: Igor Shchipanov  
 Email: oneyearday@gmail.com  
 phone: 8 (911) 827-72-00  
