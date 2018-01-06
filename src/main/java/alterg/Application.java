@@ -1,5 +1,6 @@
 package alterg;
 
+import alterg.io.ExtensionFilenameFilter;
 import alterg.service.FileExplorer;
 import alterg.service.SessionDataProcessor;
 

@@ -1,5 +1,6 @@
 package alterg.service;
 
+import alterg.worker.ProcessorWorker;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

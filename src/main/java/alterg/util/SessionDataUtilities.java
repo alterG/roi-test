@@ -1,4 +1,4 @@
-package alterg.service;
+package alterg.util;
 
 public class SessionDataUtilities {
 

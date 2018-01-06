@@ -1,8 +1,12 @@
-package alterg.service;
+package alterg.worker;
 
 import alterg.dto.SessionAverageTimeBean;
 import alterg.dto.SessionData;
 import alterg.dto.SessionDataInputBean;
+import alterg.io.CsvFileReader;
+import alterg.io.CsvFileWriter;
+import alterg.service.SessionDataHandler;
+import alterg.service.SessionDataProcessor;
 import alterg.transform.SessionTransformer;
 import lombok.AllArgsConstructor;
 import org.joda.time.LocalDate;
