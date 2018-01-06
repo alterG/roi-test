@@ -11,10 +11,14 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <archive>
+                        <manifest>
+                            <mainClass>alterg.Application</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
@@ -43,6 +47,7 @@
         <lombok.version>1.16.18</lombok.version>
         <joda-time.version>2.9.9</joda-time.version>
         <super-csv.version>2.4.0</super-csv.version>
+        <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
     </properties>
 
 
