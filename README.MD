@@ -22,17 +22,17 @@ mvn install
 java -jar roi-test-1.0-SNAPSHOT.jar
 ```
 
-**Available commands**    
-* calc - to calculate sessions average visit time\n"
-* mov filename directory - to move file to directory\n"
-* rm filename - to delete file\n"
-* ls - to show files in work directory\n"
-* cd dirname - to change work directory\n"
-* cat filename - to print file content\n"
-* help - show menu\n"
-* exit - close program");
+**Available commands**   
+* calc - to calculate sessions average visit time
+* mov filename directory - to move file to directory
+* rm filename - to delete file
+* ls - to show files in work directory
+* cd dirname - to change work directory
+* cat filename - to print file content
+* help - show menu
+* exit - close program
 
 **Available commands** 
-Author: Igor Shchipanov
-Email: oneyearday@gmail.com
-phone: 8 (911) 827-72-00
+Author: Igor Shchipanov  
+Email: oneyearday@gmail.com  
+phone: 8 (911) 827-72-00  
